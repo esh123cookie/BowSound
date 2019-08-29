@@ -7,4 +7,4 @@
 
 
 ### Settings
-There are no settings
+To edit settings, open config.yml in plugin folder

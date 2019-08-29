@@ -7,9 +7,12 @@ use pocketmine\event\entity\ProjectileHitEntityEvent;
 use pocketmine\event\entity\ProjectileHitEvent;
 use pocketmine\network\mcpe\protocol\PlaySoundPacket;
 use pocketmine\plugin\PluginBase;
+use pocketmine\utils\Config;
 
 class Main extends PluginBase implements Listener{
     public function onEnable(){
+        $this->saveResource('config.yml', false);
+        $this->config = new Config($this->getDataFolder() . 'config.yml', Config::YAML);
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
     }
     
@@ -27,6 +30,11 @@ class Main extends PluginBase implements Listener{
                 $pk->pitch = 1;
                 $pk->soundName = 'random.toast';
                 $entity->dataPacket($pk);
+                
+                $message = $this->config->get('hit-message');
+                if($message !== false){
+                    $entity->sendMessage(str_replace(['%hp', '%bhp', '%rawname', '%name'], [$target->getHealth(), $event->getBaseDamage(), $entity->getName(), $entity->getDisplayName()], $message));
+                }
             }
         }
     }
