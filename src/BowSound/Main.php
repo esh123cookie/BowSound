@@ -33,7 +33,7 @@ class Main extends PluginBase implements Listener{
                 
                 $message = $this->config->get('hit-message');
                 if($message !== false){
-                    $entity->sendMessage(str_replace(['%hp', '%bhp', '%rawname', '%name'], [$target->getHealth(), $event->getBaseDamage(), $entity->getName(), $entity->getDisplayName()], $message));
+                    $entity->sendMessage(str_replace(['%hp', '%damage', '%rawname', '%name'], [$target->getHealth(), $projectile->getResultDamage(), $entity->getName(), $entity->getDisplayName()], $message));
                 }
             }
         }
