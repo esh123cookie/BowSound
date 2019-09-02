@@ -1,5 +1,5 @@
 <?php
-namespace BowSound;
+namespace korado531m7\BowSound;
 
 use pocketmine\Player;
 use pocketmine\event\Listener;
